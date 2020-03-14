@@ -9,6 +9,6 @@ module.exports = new Command({
 	let embed = new discord.RichEmbed();
 	embed.setColor(client.color);
 	embed.setTitle('have an issue? bot not working?');
-	embed.setDescription('join the support server\nhttps://discord.gg/GTkjQFr');
+	embed.setDescription('join the support server\nhttps://discord.gg/Cq3x3VQ');
 	message.channel.send(embed);
 });
