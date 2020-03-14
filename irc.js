@@ -250,6 +250,12 @@ async function broadcastToAllCSRChannels(message) {
 	// if(!message.attachments.size && !message.deleted) {
 	//	message.delete(500);
 	// }
+	
+	// Only Allow Send From Channels 
+	if(message.guild.id!="600014903775985710" || message.guild.id!="688275499725750310"){
+	return;
+	}
+	
 	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	await wait(1000);
 	if (client.system.style.public == 'embed') {
@@ -342,9 +348,10 @@ process.on('unhandledRejection', (err) => {
 				info.message ? info.message.cleanContent : 'None Found!'
 			}}`;
 		}
-
+		
 		// @ts-ignore
-		return client.channels.get('543167247330312232').send(`
+		// Bot Log into a desire chanel
+		return client.channels.get('688466079575834769').send(`
 	\`\`\`js
 	Error: ${require('util')
 		.inspect(err)
@@ -356,7 +363,7 @@ process.on('unhandledRejection', (err) => {
 	}
 
 	// @ts-ignore
-	return client.channels.get('543167247330312232').send(`
+	return client.channels.get('688466079575834769').send(`
 \`\`\`xs
 Error: ${err.name}
     ${err.message}
