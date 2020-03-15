@@ -253,6 +253,7 @@ async function broadcastToAllCSRChannels(message) {
 
 	// Only Allow Send From Channels
 
+	// Only Allow Servers Below
 	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
 		return;
 	}
@@ -292,14 +293,14 @@ async function sendPrivate(message) {
 	if (!channel) {
 		return;
 	}
- 
-	
-	// Only Allow chanles Below 
-	if(message.guild.id!="600014903775985710" && message.guild.id!="688275499725750310"){
+
+
+	// Only Allow Servers Below
+	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
 		return;
 	}
-	
- 
+
+
 	if (!message.attachments.size && message.deletable) {
 		message.delete(500).catch((e) => {});
 	}
@@ -358,9 +359,9 @@ process.on('unhandledRejection', (err) => {
 		}
 
 		// @ts-ignore
- 
+
 		// Log Bot into channel ID
- 
+
 		return client.channels.get('688466079575834769').send(`
 	\`\`\`js
 	Error: ${require('util')
