@@ -288,7 +288,7 @@ async function sendPrivate(message) {
 	}
 	
 	// Only Allow chanles Below 
-	if(message.guild.id!="600014903775985710" || message.guild.id!="688275499725750310"){
+	if(message.guild.id!="600014903775985710" && message.guild.id!="688275499725750310"){
 		return;
 	}
 	
