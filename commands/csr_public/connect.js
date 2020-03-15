@@ -67,7 +67,7 @@ module.exports = Connect.execute(async (client, message, args) => {
 		// 	if (pChannel.guild.id == message.guild.id) return;
 		// 	pChannel.send(embed);
 		// });
-		client.system.sendAll(embed)
+		client.system.sendAll(embed);
 		let webhook = await channel.createWebhook('csr');
 		client.system.webhookManager.add(message.guild, { private: webhook });
 	}
