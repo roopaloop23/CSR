@@ -251,7 +251,12 @@ async function broadcastToAllCSRChannels(message) {
 	//	message.delete(500);
 	// }
 
- 
+	// Only Allow Send From Channels
+
+	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
+		return;
+	}
+
 	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	await wait(1000);
 	if (client.system.style.public == 'embed') {
