@@ -252,7 +252,8 @@ async function broadcastToAllCSRChannels(message) {
 	// }
 
 	// Only Allow Send From Channels
-	if(message.guild.id!="600014903775985710" || message.guild.id!="688275499725750310"){
+
+	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
 		return;
 	}
 
@@ -289,6 +290,10 @@ async function broadcastToAllCSRChannels(message) {
 async function sendPrivate(message) {
 	const channel = client.system.getChannels(message.guild).private;
 	if (!channel) {
+		return;
+	}
+
+	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
 		return;
 	}
 
