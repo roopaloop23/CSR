@@ -62,11 +62,12 @@ module.exports = Connect.execute(async (client, message, args) => {
 		embed.setColor(client.color);
 		embed.setAuthor(message.guild.name, message.guild.iconURL);
 		embed.setDescription('has connected');
-		let connected = client.system.getMatchingPrivate(message.guild);
-		connected.forEach((pChannel) => {
-			if (pChannel.guild.id == message.guild.id) return;
-			pChannel.send(embed);
-		});
+		// let connected = client.system.getMatchingPrivate(message.guild);
+		// connected.forEach((pChannel) => {
+		// 	if (pChannel.guild.id == message.guild.id) return;
+		// 	pChannel.send(embed);
+		// });
+		client.system.sendAll(embed)
 		let webhook = await channel.createWebhook('csr');
 		client.system.webhookManager.add(message.guild, { private: webhook });
 	}
