@@ -251,11 +251,6 @@ async function broadcastToAllCSRChannels(message) {
 	//	message.delete(500);
 	// }
 
-	// Only Allow chanles Below 
-	if(message.guild.id!="600014903775985710" || message.guild.id!="688275499725750310"){
-		return;
-	}
-
 	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	await wait(1000);
 	if (client.system.style.public == 'embed') {
@@ -291,7 +286,12 @@ async function sendPrivate(message) {
 	if (!channel) {
 		return;
 	}
-
+	
+	// Only Allow chanles Below 
+	if(message.guild.id!="600014903775985710" || message.guild.id!="688275499725750310"){
+		return;
+	}
+	
 	if (!message.attachments.size && message.deletable) {
 		message.delete(500).catch((e) => {});
 	}
