@@ -218,19 +218,19 @@ client.on('message', (message) => {
 	cmdHandler.handle(client, message);
 });
 // /RATE LIMIT EVENT/////////////////////////////////////////////////////////////
-let limitcount = 0;
-const limitTime = 0;
-client.on('rateLimit', (ratelimit) => {
-	console.log(ratelimit);
-	if (ratelimit) {
-		limitcount += 1;
-		if (limitcount >= 3) {
-			initLockdown();
-			client.lockdown.time += 7000;
-			limitcount = 0;
-		}
-	}
-});
+// let limitcount = 0;
+// const limitTime = 0;
+// client.on('rateLimit', (ratelimit) => {
+// 	console.log(ratelimit);
+// 	if (ratelimit) {
+// 		limitcount += 1;
+// 		if (limitcount >= 3) {
+// 			initLockdown();
+// 			client.lockdown.time += 7000;
+// 			limitcount = 0;
+// 		}
+// 	}
+// });
 
 /**
  *
