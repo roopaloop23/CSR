@@ -6,7 +6,7 @@ const leave = new Command({
 	hideinhelp:true,
 });
 module.exports = leave.execute((client, message, args) => {
-	if (message.author.id !== '298258003470319616') {
+	if (message.author.id !== ['439858575624372235', '332324700208496641', '477506746986921992'] ) {
 		message.channel.send('no permission');
 		return;
 	}
