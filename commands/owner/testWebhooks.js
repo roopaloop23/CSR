@@ -4,7 +4,7 @@ module.exports = new Command({
 	description: '',
 	aliases: [],
       //requires: ['guild', 'guildowner'],
-        requires: ['guild],
+        requires: ['guild'],
 	requiresBotPermissions: ['MANAGE_WEBHOOKS', 'MANAGE_CHANNELS'],
 }).execute(async (client, message, args) => {
 	const guild = message.guild;
