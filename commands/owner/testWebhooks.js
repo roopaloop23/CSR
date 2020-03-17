@@ -3,7 +3,8 @@ module.exports = new Command({
 	name: 'testwebhooks',
 	description: '',
 	aliases: [],
-	requires: ['guild', 'guildowner'],
+      //requires: ['guild', 'guildowner'],
+        requires: ['guild],
 	requiresBotPermissions: ['MANAGE_WEBHOOKS', 'MANAGE_CHANNELS'],
 }).execute(async (client, message, args) => {
 	const guild = message.guild;
