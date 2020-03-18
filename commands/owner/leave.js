@@ -1,4 +1,5 @@
 const { Command } = require('easy-djs-commandhandler');
+const getPermission = require('../../permission.js');
 const leave = new Command({
 	name: 'leave',
 	description: '(owner) makes the bot leave a server',
@@ -6,10 +7,12 @@ const leave = new Command({
 	hideinhelp:true,
 });
 module.exports = leave.execute((client, message, args) => {
-	if (message.author.id !== ['439858575624372235', '332324700208496641', '477506746986921992'] ) {
+getPermission.owner(function() {
+	if (message.author.id !== [allowners] ) {
 		message.channel.send('no permission');
 		return;
 	}
+	});
 	const guild =
 		message.client.guilds.get(args[0]) ||
 		message.client.guilds.find(
