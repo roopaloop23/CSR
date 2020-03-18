@@ -5,6 +5,7 @@ const client = new Bot();
 const jndb = require('jndb');
 const fs = require('fs');
 const commandHandler = require('easy-djs-commandhandler');
+const getPermission = require('./permission.js');
 // @ts-ignore
 require('./env').load('.env');
 const prefix = process.env.prefix || 'c-';
@@ -254,10 +255,16 @@ async function broadcastToAllCSRChannels(message) {
 	// Only Allow Send From Channels
 
 	// Only Allow Servers Below
-	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
-		return;
-	}
-
+	//if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
+	//	return;
+	//}
+	// Only Allow Servers Below
+	getPermission.server(function() {
+	//	 if(message.guild.id!="641041763926016000"){
+  	 if(message.guild.id!=allservers){
+  		return;
+   	}; 
+	});
 	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	await wait(1000);
 	if (client.system.style.public == 'embed') {
