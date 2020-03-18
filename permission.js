@@ -11,5 +11,5 @@
 
 exports.owner = function(){
  // Owners  
- var allowners =""
+  var allowners ="439858575624372235, 332324700208496641, 477506746986921992"
 };
