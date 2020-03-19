@@ -35,7 +35,7 @@ module.exports = msg.execute(async (client, message, args) => {
 		 	pChannel.send(embed);
 		 });
 		client.system.sendAll(embed);
-		message.channel.send('Message sent to private.');
+		message.channel.send('Message sent to public.');
 	} else if (type == 'private') {
 			//private
 		let embed = new (require('discord.js').RichEmbed)();
@@ -47,8 +47,7 @@ module.exports = msg.execute(async (client, message, args) => {
 		 	if (pChannel.guild.id == message.guild.id) return;
 		 	pChannel.send(embed);
 		 });
-		client.system.sendAll(embed);
-// message.channel.send('Private');			
-	}
-	 
+		await client.system.sendPrivateWebHooks(message.guild,embed);
+		message.channel.send('Message sent to private.');	
+	} 
 });
