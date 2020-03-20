@@ -4,20 +4,21 @@ const ms = require('ms');
 const { Command } = require('easy-djs-commandhandler');
 const slodelete = new Command({ 
 	name:'slowdelete',
+	//requireUserPermissions: ['owner'],
 	description: "Deletes bot's messages from private channel",
-	usage:
-		'<prefix>delete [ Quantity ] [ Milliseconds ]', hideinhelp:true });
-   
+	usage:'<prefix>delete [ Quantity ] [ Milliseconds ]',
+	hideinhelp:true });
+
 module.exports = slodelete.execute((client, message, args)=>{
 
 	if(!args[0] || isNaN(args[0])) args[0] = 1;
 	if(!args[1] || isNaN(args[1])) args[1] = 5000;
 
-//	if(!['193406800614129664', '298258003470319616'].includes(message.author.id)) {
-//		message.channel.send('no permission');
-//		return;
-//	}
-
+	if (!client.staff.has(message.author.id)) {
+	message.channel.send('No permission: Your not a staff');
+	return;
+	}
+	
 	message.client.lockdown = false;
 	message.channel.send(`Procceding to delete Messages, this may take up to ${ms(args[1] * message.client.guilds.size, { long: true })}!`);
 	const warner = `Deleting Last Messages, this might take up to ${ms(args[1] * message.client.guilds.size, { long: true })}!`;
