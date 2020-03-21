@@ -3,8 +3,7 @@ const { Message } = require('discord.js');
 const ms = require('ms');
 const { Command } = require('easy-djs-commandhandler');
 const slodelete = new Command({ 
-	name:'slowdelete',
-	//requireUserPermissions: ['owner'],
+	name:'msgdelete', 
 	description: "Deletes bot's messages from private channel",
 	usage:'<prefix>delete [ Quantity ] [ Milliseconds ]',
 	hideinhelp:true });
@@ -30,12 +29,18 @@ module.exports = slodelete.execute((client, message, args)=>{
 		setTimeout(async function() {
 			try{
 				if(ch.permissionsFor(ch.guild.me).has('MANAGE_MESSAGES') && ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
-					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.author.id == message.client.user.id && m.content != warner));
-					if(!messages.size) return console.log('Skipping: Last message was not a bot in server: ' + ch.guild.name + ' - ' + message.author.username); 
+					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.author.bot == true && m.content != warner));
+					if(!messages.size){  client.channels.get('690071308586844243').send(
+					'Skipping: **' + ch.guild.name + '** Last message was **@' + message.author.username + '** and not a bot.') 
+					return console.log('Skipping: Last message was not a bot in server:' + ch.guild.name + ' User:' + message.author.username); } 
 					await ch.bulkDelete(messages, true);
 				}
 				else if(ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
 					ch.send('COULD NOT DELETE LAST MESSAGES BECAUSE I DO NOT HAVE PERMS!');
+					 // Log Bot into channel ID
+					 client.channels.get('690071308586844243').send(
+					'Skipping: **' + ch.guild.name + '** dose not have ' + '\`\`VIEW_CHANNEL\`\` permissions set.' );
+					 return console.log('Skipping: ' + ch.guild.name + ' dose not have VIEW_CHANNEL perms. Last message: ' + message.author.username); 			
 				}
 			}
 			catch(e) {
