@@ -29,7 +29,7 @@ module.exports = slodelete.execute((client, message, args)=>{
 		setTimeout(async function() {
 			try{
 				if(ch.permissionsFor(ch.guild.me).has('MANAGE_MESSAGES') && ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
-					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.author.bot == true && m.content != warner));
+					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.webhookID != undefined && m.content != warner));
 					if(!messages.size){  client.channels.get('690071308586844243').send(
 					'```prolog\n Skipping: `' + ch.guild.name + '` last message was \'@' + message.author.username + '\' and not a Bot.```') 
 					return console.log('Skipping: Last message was not a bot in server:' + ch.guild.name + ' User:' + message.author.username); } 
