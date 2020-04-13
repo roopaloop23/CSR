@@ -1,15 +1,7 @@
- exports.bot_logs = function(){
-  var getbotlogs ="689544434458820871"  // Chanel ID Bot Logs   
-  };
+module.exports = { 
 
- exports.server = function(){
- // Allowed Servers 
- var andS ='&& message.guild.id!='
- var allservers ='"439858575624372235" andS "462007482001391616"'
- // Comment out 303 - 304 in irc.js to allow all
-};
+	AllowedServer: ['641041763926016000', '462007482001391616'],
+	botownerList: ['439858575624372235', '332324700208496641', '477506746986921992'],
+	errorChannel : "690071386458554421",
 
-exports.owner = function(){
- // Owners  
-  var allowners ="439858575624372235, 332324700208496641, 477506746986921992"
-};
+ };
