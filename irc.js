@@ -5,14 +5,14 @@ const client = new Bot();
 const jndb = require('jndb');
 const fs = require('fs');
 const commandHandler = require('easy-djs-commandhandler');
-const getPermission = require('./permission.js');
 // @ts-ignore
 require('./env').load('.env');
 const prefix = process.env.prefix || 'c-';
 const testing = process.env.testing || false;
+const permission = require("./permission.js");
 const cmdHandler = new commandHandler.Handler(client, {
 	prefix: prefix,
-	owner: ['439858575624372235', '332324700208496641', '477506746986921992'],
+	owner: permission.botownerList,
 	defaultcmds: true,
 	prefixFunc: (message) => {
 		if (!message.guild) return prefix;
@@ -255,16 +255,10 @@ async function broadcastToAllCSRChannels(message) {
 	// Only Allow Send From Channels
 
 	// Only Allow Servers Below
-	//if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
-	//	return;
-	//}
-	// Only Allow Servers Below
-	getPermission.server(function() {
-	//	 if(message.guild.id!="641041763926016000"){
-  	 if(message.guild.id!=allservers){
-  		return;
-   	}; 
-	});
+	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
+		return;
+	}
+
 	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	await wait(1000);
 	if (client.system.style.public == 'embed') {
@@ -302,10 +296,16 @@ async function sendPrivate(message) {
 	}
 
 
-	// Only Allow Servers Below
-	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
-		return;
-	}
+	// Only Allow Servers from permission.js 
+var foundServer = false;
+for (i = 0; i < permission.AllowedServer.length; i++){
+   if (permission.AllowedServer[i] == message.guild.id){
+      foundServer = true;
+      break;
+   }
+}
+if (!foundServer) return;
+
 
 
 	if (!message.attachments.size && message.deletable) {
@@ -369,19 +369,18 @@ process.on('unhandledRejection', (err) => {
 
 		// Log Bot into channel ID
 
-		return client.channels.get('688466079575834769').send(`
+		return client.channels.get(permission.errorChannel).send(`
 	\`\`\`js
 	Error: ${require('util')
 		.inspect(err)
 		.slice(0, 1800)}
-
 	${addInfo}
 		\`\`\`
 		`);
 	}
 
 	// @ts-ignore
-	return client.channels.get('688466079575834769').send(`
+	return client.channels.get(permission.errorChannel).send(`
 \`\`\`xs
 Error: ${err.name}
     ${err.message}
