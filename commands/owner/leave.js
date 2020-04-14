@@ -7,18 +7,6 @@ const leave = new Command({
 	hideinhelp:true,
 });
 module.exports = leave.execute((client, message, args) => {
-
-// Restrict to only allow staff members stafflist.js
-//	if(!message.client.staff.has(message.author.id)) {
-//		message.channel.send('no permission');
-//		return;
-//	}
- 
-// Restrict to only allow botownerList from permission.js
-	if (message.author.id == permission.botownerList ) {
-		message.channel.send('no permission');
-		return;
-	}
 	
 	const guild =
 		message.client.guilds.get(args[0]) ||
