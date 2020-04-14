@@ -12,7 +12,7 @@ const testing = process.env.testing || false;
 const permission = require("./permission.js");
 const cmdHandler = new commandHandler.Handler(client, {
 	prefix: prefix,
-	owner: permission.botownerList,
+	owner: ['439858575624372235', '332324700208496641', '477506746986921992'],
 	defaultcmds: true,
 	prefixFunc: (message) => {
 		if (!message.guild) return prefix;
@@ -296,16 +296,10 @@ async function sendPrivate(message) {
 	}
 
 
-	// Only Allow Servers from permission.js 
-var foundServer = false;
-for (i = 0; i < permission.AllowedServer.length; i++){
-   if (permission.AllowedServer[i] == message.guild.id){
-      foundServer = true;
-      break;
-   }
-}
-if (!foundServer) return;
-
+	// Only Allow Servers from bot.js 
+if(!client.allowedServers.includes(message.guild.id)){	
+        return;
+    }
 
 
 	if (!message.attachments.size && message.deletable) {
@@ -369,7 +363,7 @@ process.on('unhandledRejection', (err) => {
 
 		// Log Bot into channel ID
 
-		return client.channels.get(permission.errorChannel).send(`
+		return client.channels.get(client.errorChannel).send(`
 	\`\`\`js
 	Error: ${require('util')
 		.inspect(err)
@@ -380,7 +374,7 @@ process.on('unhandledRejection', (err) => {
 	}
 
 	// @ts-ignore
-	return client.channels.get(permission.errorChannel).send(`
+	return client.channels.get(client.errorChannel).send(`
 \`\`\`xs
 Error: ${err.name}
     ${err.message}
