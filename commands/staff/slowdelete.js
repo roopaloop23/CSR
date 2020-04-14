@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Message } = require('discord.js');
+const permission = require('../../permission.js');
 const ms = require('ms');
 const { Command } = require('easy-djs-commandhandler');
 const slodelete = new Command({ 
@@ -30,7 +31,7 @@ module.exports = slodelete.execute((client, message, args)=>{
 			try{
 				if(ch.permissionsFor(ch.guild.me).has('MANAGE_MESSAGES') && ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
 					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.webhookID != undefined && m.content != warner));
-					if(!messages.size){  client.channels.get('690071308586844243').send(
+					if(!messages.size){  client.channels.get(permission.errorChannel).send(
 					'```prolog\n Skipping: `' + ch.guild.name + '` last message was \'@' + message.author.username + '\' and not a Bot.```') 
 					return console.log('Skipping: Last message was not a bot in server:' + ch.guild.name + ' User:' + message.author.username); } 
 					await ch.bulkDelete(messages, true);
@@ -38,7 +39,7 @@ module.exports = slodelete.execute((client, message, args)=>{
 				else if(ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
 					ch.send('```prolog\n COULD NOT DELETE LAST MESSAGES BECAUSE I DO NOT HAVE PERMS!```');
 					 // Log Bot into channel ID
-					 client.channels.get('690071308586844243').send(
+					 client.channels.get(permission.errorChannel).send(
 					'```prolog\n Skipping: `' + ch.guild.name + '` dose not have ' + 'VIEW_CHANNEL or MANAGE_MESSAGES permissions set.```' );
 					 console.log('Skipping: ' + ch.guild.name + ' dose not have VIEW_CHANNEL or MANAGE_MESSAGES perms. Last message: ' + message.author.username); 			
 				}
