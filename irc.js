@@ -9,7 +9,6 @@ const commandHandler = require('easy-djs-commandhandler');
 require('./env').load('.env');
 const prefix = process.env.prefix || 'c-';
 const testing = process.env.testing || false;
-const permission = require("./permission.js");
 const cmdHandler = new commandHandler.Handler(client, {
 	prefix: prefix,
 	owner: ['439858575624372235', '332324700208496641', '477506746986921992'],
