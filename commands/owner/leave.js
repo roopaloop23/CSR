@@ -1,5 +1,4 @@
 const { Command } = require('easy-djs-commandhandler');
-const permission = require('../../permission.js');
 const leave = new Command({
 	name: 'leave',
 	description: '(owner) makes the bot leave a server',
