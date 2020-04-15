@@ -17,6 +17,8 @@ class Bot extends discord.Client {
 	 */
 	constructor(options) {
 		super(options);
+		this.allowedServers=['699168928605143091', '641041763926016000', '462007482001391616']
+        	this.errorChannel="690071386458554421"
 		this.db = new jndb.Connection();
 		this.system = new System(this);
 		/**
