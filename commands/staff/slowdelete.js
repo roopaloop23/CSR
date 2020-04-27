@@ -2,13 +2,13 @@
 const { Message } = require('discord.js'); 
 const ms = require('ms');
 const { Command } = require('easy-djs-commandhandler');
-const slodelete = new Command({ 
+const slowdelete = new Command({ 
 	name:'msgdelete', 
 	description: "Deletes bot's messages from private channel",
 	usage:'<prefix>delete [ Quantity ] [ Milliseconds ]',
 	hideinhelp:true });
 
-module.exports = slodelete.execute((client, message, args)=>{
+module.exports = slowdelete.execute((client, message, args)=>{
 
 	if(!args[0] || isNaN(args[0])) args[0] = 1;
 	if(!args[1] || isNaN(args[1])) args[1] = 5000;
@@ -39,8 +39,8 @@ module.exports = slodelete.execute((client, message, args)=>{
 					ch.send('```prolog\n COULD NOT DELETE LAST MESSAGES BECAUSE I DO NOT HAVE PERMS!```');
 					 // Log Bot into channel ID
 					 client.channels.get(client.errorChannel).send(
-					'```prolog\n Skipping: `' + ch.guild.name + '` dose not have ' + 'VIEW_CHANNEL or MANAGE_MESSAGES permissions set.```' );
-					 console.log('Skipping: ' + ch.guild.name + ' dose not have VIEW_CHANNEL or MANAGE_MESSAGES perms. Last message: ' + message.author.username); 			
+					'```prolog\n Skipping: `' + ch.guild.name + '` does not have ' + 'VIEW_CHANNEL or MANAGE_MESSAGES permissions set.```' );
+					 console.log('Skipping: ' + ch.guild.name + ' does not have VIEW_CHANNEL or MANAGE_MESSAGES perms. Last message: ' + message.author.username); 			
 				}
 			}
 			catch(e) {
