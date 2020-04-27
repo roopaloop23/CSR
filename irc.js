@@ -295,10 +295,10 @@ async function sendPrivate(message) {
 	}
 
 
-	// Only Allow Servers Below
-	if(message.guild.id!="688259277688930325" && message.guild.id!="462007482001391616"){
-		return;
-	}
+	// Only Allow Servers from bot.js 
+if(!client.allowedServers.includes(message.guild.id)){	
+        return;
+    }
 
 
 	if (!message.attachments.size && message.deletable) {
@@ -362,19 +362,18 @@ process.on('unhandledRejection', (err) => {
 
 		// Log Bot into channel ID
 
-		return client.channels.get('688466079575834769').send(`
+		return client.channels.get(client.errorChannel).send(`
 	\`\`\`js
 	Error: ${require('util')
 		.inspect(err)
 		.slice(0, 1800)}
-
 	${addInfo}
 		\`\`\`
 		`);
 	}
 
 	// @ts-ignore
-	return client.channels.get('688466079575834769').send(`
+	return client.channels.get(client.errorChannel).send(`
 \`\`\`xs
 Error: ${err.name}
     ${err.message}

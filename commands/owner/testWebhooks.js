@@ -1,4 +1,5 @@
 const { Command } = require('easy-djs-commandhandler');
+ 
 module.exports = new Command({
 	name: 'testwebhooks',
 	description: '',
@@ -8,11 +9,20 @@ module.exports = new Command({
 	requiresBotPermissions: ['MANAGE_WEBHOOKS', 'MANAGE_CHANNELS'],
 }).execute(async (client, message, args) => {
 	const guild = message.guild;
+	
+
+// Restrict to only allow staff members stafflist.js or administrators from discord
+    if(!message.client.staff.has(message.author.id) && !message.member.permissions.has('ADMINISTRATOR') ) {
+        message.channel.send('no permission');
+        return;
+    }	
+	
 	message.author = client.user;
 	message.content = 'test';
 	let failed = false;
 	let failReason = '';
 	let webhooks = client.system.webhookManager.get(guild);
+		
 	if (!webhooks.public && !webhooks.private) {
 		message.channel.send(
 			'❌ failed: could not find any webhooks belonging to this guild'

@@ -1,36 +1,46 @@
 // eslint-disable-next-line no-unused-vars
-const { Message } = require('discord.js');
+const { Message } = require('discord.js'); 
 const ms = require('ms');
 const { Command } = require('easy-djs-commandhandler');
-const slodelete = new Command({ name:'slowdelete', hideinhelp:true });
-module.exports = slodelete.execute((client, message, args)=>{
+const slowdelete = new Command({ 
+	name:'msgdelete', 
+	description: "Deletes bot's messages from private channel",
+	usage:'<prefix>delete [ Quantity ] [ Milliseconds ]',
+	hideinhelp:true });
 
-	if(!args[0] || isNaN(args[0])) args[0] = 50;
+module.exports = slowdelete.execute((client, message, args)=>{
+
+	if(!args[0] || isNaN(args[0])) args[0] = 1;
 	if(!args[1] || isNaN(args[1])) args[1] = 5000;
 
-
-//	if(!['193406800614129664', '298258003470319616'].includes(message.author.id)) {
-//		message.channel.send('no permission');
-//		return;
-//	}
-
-	message.client.lockdown = true;
-	message.channel.send(`Enabled Lockdown, procceding to delete Messages, this may take up to ${ms(args[1] * message.client.guilds.size, { long: true })}!`);
+	if (!client.staff.has(message.author.id)) {
+	message.channel.send('No permission: Your not a staff');
+	return;
+	}
+	
+	message.client.lockdown = false;
+	message.channel.send(`Procceding to delete Messages, this may take up to ${ms(args[1] * message.client.guilds.size, { long: true })}!`);
 	const warner = `Deleting Last Messages, this might take up to ${ms(args[1] * message.client.guilds.size, { long: true })}!`;
 	let i = 0;
-	message.client.system.channels.forEach((ch) => {
+	message.client.system.channels.public.forEach((ch) => {
 		ch.send(warner);
 	});
-	message.client.system.channels.forEach(async (ch) => {
+	message.client.system.channels.private.forEach(async (ch) => {
 		setTimeout(async function() {
 			try{
 				if(ch.permissionsFor(ch.guild.me).has('MANAGE_MESSAGES') && ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
-					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.author.id == message.client.user.id && m.content != warner));
-					if(!messages.size) return console.log('Skipping');
+					const messages = await ch.fetchMessages({ limit: args[0] }).then(msg => msg.filter(m => m.webhookID != undefined && m.content != warner));
+					if(!messages.size){  client.channels.get(client.errorChannel).send(
+					'```prolog\n Skipping: `' + ch.guild.name + '` last message was \'@' + message.author.username + '\' and not a Bot.```') 
+					return console.log('Skipping: Last message was not a bot in server:' + ch.guild.name + ' User:' + message.author.username); } 
 					await ch.bulkDelete(messages, true);
 				}
 				else if(ch.permissionsFor(ch.guild.me).has('VIEW_CHANNEL')) {
-					ch.send('COULD NOT DELETE LAST MESSAGES BECAUSE I DO NOT HAVE PERMS!');
+					ch.send('```prolog\n COULD NOT DELETE LAST MESSAGES BECAUSE I DO NOT HAVE PERMS!```');
+					 // Log Bot into channel ID
+					 client.channels.get(client.errorChannel).send(
+					'```prolog\n Skipping: `' + ch.guild.name + '` does not have ' + 'VIEW_CHANNEL or MANAGE_MESSAGES permissions set.```' );
+					 console.log('Skipping: ' + ch.guild.name + ' does not have VIEW_CHANNEL or MANAGE_MESSAGES perms. Last message: ' + message.author.username); 			
 				}
 			}
 			catch(e) {
@@ -41,6 +51,4 @@ module.exports = slodelete.execute((client, message, args)=>{
 		i++;
 	});
 	console.log(i);
-
-
 });
