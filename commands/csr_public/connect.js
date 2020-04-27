@@ -56,7 +56,8 @@ module.exports = Connect.execute(async (client, message, args) => {
 		//if (!args[2] || args[2] == '') {
 		//return message.channel.send('passcode is empty or invalid');
 		//}
-		channel.passcode = passcode || null;
+		//channel.passcode = passcode || null;
+		channel.passcode = "HeroWarsRewards";
 		client.system.channels.update(message.guild, channel, 'private');
 		let embed = new (require('discord.js').RichEmbed)();
 		embed.setColor(client.color);
