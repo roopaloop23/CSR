@@ -8,3 +8,16 @@ this isnt a server,its multiple servers communicating, and there can be people w
 `;
 
 module.exports = code;
+
+
+
+
+//Rename irc to HWR hero wars reward?
+//Advertising as recruiting?
+//Political views and spam are the same in this application?
+
+//var ruleString = ‘rules text here’;
+
+//console.log(ruleString.fontcolor(‘FF00’));
+//FF00 is red
+//module.exports = ruleString;
