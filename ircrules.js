@@ -8,3 +8,11 @@ this isnt a server,its multiple servers communicating, and there can be people w
 `;
 
 module.exports = code;
+
+
+
+
+var RuleString = `**\`\`Rules txt here\`\`**;
+
+console.log(RuleString.fontcolor('red')+
+Console.log(RuleString.fontcolor('FF00')
