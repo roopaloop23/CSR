@@ -52,5 +52,4 @@ To connect simply type the following command\nin your designated bot channel: \n
 Other commands \`c-stats\` and \`c-testwebhooks\`
 
 =           HERO WARS REWARDS BOT           =
-______ ______ ______ ______ ______ஜ۩۞۩ஜ ______ ______ ______ ______ ______
 `;
