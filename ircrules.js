@@ -37,11 +37,11 @@ const code = `
 _________________....----++++ஜ۩۞۩ஜ++++----...._________________
 ** \xa0= HERO WARS REWARDS BOT = **
 
-Rewards bot is a feed from Hero Wars Mobile \nDiscord server. 
-Heroes all across the dominion will receive \nthe info posted to us. 
-New users and other public information will \nbe posted in our public channel. 
-Failure to respect staff and others will be \nhandled accordingly. 
-To connect simply type the following command\nin your designated bot channel: \`c-connect
+Rewards bot is a feed from Hero Wars \nMobile Discord server. 
+Heroes all across the dominion will \nreceive the info posted to us. 
+New users and other public information \nwill be posted in our public channel. 
+Failure to respect staff and others will \nbe handled accordingly. 
+To connect simply type the following command\nin your designated bot channel: /n \`c-connect
 #your-channel-name private HeroWarsRewards\`  
 Other commands \`c-stats\` and \`c-testwebhooks\`
 
