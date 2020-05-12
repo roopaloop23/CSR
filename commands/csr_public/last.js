@@ -3,8 +3,7 @@ const { Command } = require('easy-djs-commandhandler');
 const last = new Command({ 
 	name:'last', 
 	description: "Last Reward posted",
-	usage:'<prefix>last ',
-	hideinhelp:true });
+	usage:'<prefix>last '});
 
 module.exports = last.execute((client, message, args)=>{
 
