@@ -5,19 +5,19 @@ const last = new Command({
 	description: "Last Reward posted",
 	usage:'<prefix>last '});
 
-module.exports = last.execute((client, message, args)=>{
-
-      let target = message.guild.channels.find(c => c.id == client.HWMChannel) || null; // find the targeted channel
-      if (target) { // make sure that the targeted channel exists, if it exists then fetch its last message
-        target
-          .fetchMessages({ limit: 3 })
-          .then(f =>
-            message.channel.send(
-              `Last 3 Rewards: \n> ${f.array()[2].content}   \n> ${f.array()[1].content}  \n> ${f.first().content}  `
-			) // send the last message to the initial channel
-          );
-      } else { //if target doesn't exist, send an error
-        message.channel.send("Hero Mobile Channel ID is not set.");
-      }
- 
+module.exports = last.execute((client, message, args)=>{ 
+	 
+	let target = client.channels.get(client.HWMChannel); // find the targeted channel 
+	 
+	if (!target) { 
+		message.channel.send("Hero Mobile Channel ID is not set.");
+		return
+	}
+		 
+	// send the last message to the initial channel    
+	setTimeout(async function() {
+	const msg = await target.fetchMessages({ limit: 3 }).then(msg => message.channel.send(
+	`Last 3 Rewards: \n> ${msg.array()[2].content}   \n> ${msg.array()[1].content}  \n> ${msg.first().content}  `)); 
+				      
+    });
 });
